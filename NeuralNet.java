@@ -21,7 +21,7 @@ public class NeuralNet {
 	private static double[] outputLayerWeights;
 	private static double[] outputLayerOutputs;
 
-	private static HashMap<Integer, Integer> connections = null;
+	private static HashMap<Integer, Integer> connections;
 	private static HashMap<Integer, ArrayList<Object>> beehive;
 	private static ArrayList<Object> neuron;
 	private static double adjusted;
@@ -39,18 +39,19 @@ public class NeuralNet {
 	public static void main(String[] args) throws IOException {
 		//Example initialisation - consider //TODO: byte data type
 		
-		NeuralNet.setN_qty(33);
+		NeuralNet.setN_qty(32);
 		NeuralNet.setT_qty(10000);
 		NeuralNet.setV_qty(4);
 		
 		double[][] in = {{1000}, {0111}, {0101}, {1001}, {0110}};
 		double[] out = {0111};
-		double[] outputs = new double[4];
+		outputs = new double[4];
 		
 		for (int outs = 0; outs < 4; outs++) {
 			outputs[outs] = 0;
 		}
 		
+		//Start our output layer with zeroes
 		NeuralNet.setOutputs(outputs);
 		
 		//set the desired output
@@ -66,7 +67,10 @@ public class NeuralNet {
 		NeuralNet.setOutputLayerOutputs(NeuralNet.getOutputs());
 		
 		//Set our outputLayer Weights
-		NeuralNet.setOutputLayerWeights(OutputLayer.getOutputLayerWeights());
+		OutputLayer.outputLayerInitialWeights();
+		
+		//Set our outputLayer initial values
+		OutputLayer.output();
 		
 		//Generate the weights per Neuron and set them
 		NeuralNet.setHiddenLayerWeights(GenerateWeights.weights(NeuralNet.getN_qty()));
@@ -75,8 +79,11 @@ public class NeuralNet {
 		//Generate our BeeHive
 		System.err.println("Generating HashMap of Neurons...");
 		HiveNest.mapping(NeuralNet.getNeuron(), n_qty, v_qty);
+		
+		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
+		HiddenLayerWeights.hidden();
 
-		//Activate the training Module
+		//Activate the training Module after generating our connections
 		Activation.activate();
 		
 	}

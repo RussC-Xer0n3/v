@@ -86,12 +86,6 @@ public class HiveNest {
 		//Ensure we have set our beehive
 		NeuralNet.setBeehive(beehive);
 		
-		//Generate our outputLayer initial weights
-		OutputLayer.outputLayerInitialWeights();
-		
-		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
-		HiddenLayerWeights.hidden();
-		
 		//Set the value of our first index in the neuron to the training(), that's the brain of the bee...
 		System.err.println("Adding our training module and coordinates ...");
 		for (Entry<Integer, ArrayList<Object>> populated : beehive.entrySet()) {

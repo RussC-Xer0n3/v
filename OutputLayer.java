@@ -40,7 +40,7 @@ public class OutputLayer {
 		if(sum <= 4) {
 			for (double[] g : inputs) {
 				for (int layer = 0; layer < 4; layer++) {
-					Error.error(inputs[layer], desiredOutputs, outputLayerOutputs, NeuralNet.getHiddenLayerOutputs(), outputLayerWeights, NeuralNet.getLearningrate(), NeuralNet.getHiddenLayerWeights());
+					Error.error(inputs[layer], outputLayerOutputs, desiredOutputs, NeuralNet.getHiddenLayerOutputs(), outputLayerWeights, NeuralNet.getLearningrate(), NeuralNet.getHiddenLayerWeights());
 				}
 			}
 		}
@@ -49,9 +49,13 @@ public class OutputLayer {
 
 		double[] outputz = new double[4];
 		
-		//If we use Threshold we can set the threshold limits in that class instead of here.
+		/*
+		 * Cycle through the outputLayerWeights and get a threshold
+		 * Assign to Array
+		 * and the the new outputs
+		 */
 		for (int outputs = 0; outputs < 4; outputs++) {
-			if (Threshold.threshold(outputLayerWeights[outputs]) == 1) {;
+			if (Threshold.threshold(outputLayerWeights[outputs]) == 1) {
 				outputz[outputs] = 1;
 			} else{
 				outputz[outputs] = 0;

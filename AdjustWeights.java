@@ -1,5 +1,9 @@
 package v;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.ArrayList;
+
 /**
  * Adjusts output layer weights based on the desired output and the 
  * input values according to the learning rate and the
@@ -11,6 +15,8 @@ package v;
 public class AdjustWeights {
 	
 	private static double[] outputLayerWeights;
+	private static double[] hiddenLayerWeights;
+	static HashMap<Integer, ArrayList<Object>> hive;
 	
 	/**
 	 * Update the outputLayerWeights according to the parameters
@@ -19,9 +25,9 @@ public class AdjustWeights {
 	 * @param learning_rate
 	 * @param error
 	 */
-	public static void adjustWeights(double[] desiredOutput, double[] input, double learning_rate, double error) {
+	public static void adjustOutputWeights(double[] desiredOutput, double[] input, double learning_rate, double error) {
 
-		System.err.println("Adjusting weights in the hidden Layer...");
+		System.err.println("Adjusting weights in the outPut Layer...");
 		
 		double[] weights = new double[outputLayerWeights.length-1];
 		
@@ -33,6 +39,40 @@ public class AdjustWeights {
 				outputLayerWeights[hl] = weights[hl];
 			}
 	    }
+		
+		NeuralNet.setOutputLayerWeights(outputLayerWeights);
+	}
+	
+	/**
+	 * Repopulate the weights after they have been adjusted in the hidden layer
+	 * 
+	 * @param desiredOutput
+	 * @param input
+	 * @param learning_rate
+	 * @param error
+	 */
+	public static void adjustHiddenWeights(double[] desiredOutput, double[] input, double learning_rate, double error) {
+
+		System.err.println("Adjusting weights in the hidden Layer...");
+		
+		double[] weights = new double[hiddenLayerWeights.length-1];
+		
+		for (int i = 0; i < desiredOutput.length-1; i++) {
+	        	
+        	weights[i] = weights[i] + learning_rate * error * input[i];
+    		
+			for (int hl = 0; hl <= hiddenLayerWeights.length-1; hl++) {
+				hiddenLayerWeights[hl] = weights[hl];
+			}
+	    }
+		
+		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
+			for (double hl : hiddenLayerWeights) {
+				bee.getValue().set(7, hiddenLayerWeights[(int) hl]);
+			}
+		}
+		
+		NeuralNet.setHiddenLayerWeights(hiddenLayerWeights);
 	}
 
 	/**
@@ -49,5 +89,21 @@ public class AdjustWeights {
 	 */
 	public static void setOutputLayerWeights(double[] outputLayerWeights) {
 		AdjustWeights.outputLayerWeights = outputLayerWeights;
+	}
+	
+	/**
+	 * Returns the hiddenLayerWeights
+	 * @return
+	 */
+	public static double[] getHiddenLayerWeights() {
+		return hiddenLayerWeights;
+	}
+	
+	/**
+	 * Sets the hiddenLayerWeights
+	 * @param hiddenLayerWeights
+	 */
+	public static void setHiddenLayerWeights(double[] hiddenLayerWeights) {
+		AdjustWeights.hiddenLayerWeights = hiddenLayerWeights;
 	}
 }

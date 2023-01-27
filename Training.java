@@ -19,7 +19,7 @@ public class Training {
 	static double [] hiddenLayerWeights = NeuralNet.getHiddenLayerWeights();
 	static double [] hiddenLayerOutputs = NeuralNet.getHiddenLayerWeights();
 	static double [] outputLayerWeights = NeuralNet.getHiddenLayerWeights();
-	static double [] outputLayerOutputs = outputLayerWeights;
+	static double [] outputLayerOutputs = NeuralNet.getOutputLayerWeights();
 	
 	/**
 	 * Receives Neuron data and performs the training from within the 

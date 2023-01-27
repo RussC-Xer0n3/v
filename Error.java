@@ -31,16 +31,16 @@ public class Error {
 	    for (int b = 0; b < desiredOutput.length-1; b++) {
 	        //compare each value with the desired outputs mapping to find the error
 	        if (outputLayerOutputs[b] != desiredOutput[b]) {
-	            //calculate the error for each output layer neuron
+	            //calculate the error for each output layer neuron (linear gradient descent)
 	            double outputLayerNeuronError = desiredOutput[b] - outputLayerOutputs[b];
 	            //calculate the error for each hidden layer neuron
 	            for (int k = 0; k < hiddenLayerOutputs.length; k++) {
 	                //hidden layer neuron error is always 0 since output layer outputs is binary
 	                double hiddenLayerNeuronError = outputLayerOutputs[b] * (1 - outputLayerOutputs[b]) * outputLayerWeights[b] * outputLayerNeuronError; //Last outputLayerWeights were [b][k] not [k]
 	                //adjust the output layer weights
-	                AdjustWeights.adjustWeights(outputLayerWeights, hiddenLayerOutputs, learningRate, outputLayerNeuronError);
+	                AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, learningRate, outputLayerNeuronError);
 	                //adjust the hidden layer weights
-	                AdjustWeights.adjustWeights(hiddenLayerWeights, input, learningRate, hiddenLayerNeuronError);
+	                AdjustWeights.adjustHiddenWeights(hiddenLayerWeights, input, learningRate, hiddenLayerNeuronError);
 	            }
 	
 	        }

@@ -1,0 +1,21 @@
+package v;
+
+/**
+ * Perform a modulus of the derivative of the volume 
+ * @author xer0n3 - developing821@outlook.com - R.Clarke
+ *
+ */
+public class GetZ {
+
+	/**
+	 * Perform a modulus of the derivative of the volume
+	 * to get Z value
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static int getz(int key) {
+		return key % (NeuralNet.getV_qty() * NeuralNet.getV_qty());
+	}
+	
+}

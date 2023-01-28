@@ -3,6 +3,7 @@ package v;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Begin the build and activation of our Radial Basis Neural Network
@@ -40,7 +41,6 @@ public class NeuralNet {
 		//Example initialisation - consider //TODO: byte data type
 		
 		NeuralNet.setN_qty(32);
-		NeuralNet.setT_qty(10000);
 		NeuralNet.setV_qty(4);
 		
 		double[][] in = {{1000}, {0111}, {0101}, {1001}, {0110}};
@@ -55,11 +55,11 @@ public class NeuralNet {
 		NeuralNet.setOutputs(outputs);
 		
 		//set the desired output
-		System.err.println("Setting the desired output" + out);
+		System.err.println("Setting the desired output...");
 		NeuralNet.setDesiredOutput(out);
 
 		//set the inputs
-		System.err.println("Setting the inputs: " + in);
+		System.err.println("Setting the inputs...");
 		NeuralNet.setInputs(in);
 		
 		//Generate out output layer outputs as 0 to start with...
@@ -82,9 +82,38 @@ public class NeuralNet {
 		
 		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
 		HiddenLayerWeights.hidden();
-
+		
 		//Activate the training Module after generating our connections
 		Activation.activate();
+		
+		//Show our HashMap module information
+		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
+			System.err.println("Hashmap Key:: " + bee.getKey() + " Value::" + bee.getValue() +"");
+		}
+		
+		//Set the training iterations
+		NeuralNet.setT_qty(10000);
+		
+		//Activate the Neurons by setting the Training class into index 0 of the Neuron
+		System.err.println("Activating training module...");
+		for (Entry<Integer, ArrayList<Object>> beeHive : beehive.entrySet()) {
+			beeHive.getValue().set(0, Training.training(beeHive.getKey().intValue()));
+		}
+
+		/**
+		 * Nothing is being updated because the Neural network has changed with the
+		 * Radial Basis Network implementation and thus the system needs to be 
+		 * looked into again
+		 */
+		System.err.println("Printing outputLayerOutPuts");
+		for (int i = 0; i < outputs.length; i++) {
+			System.out.print(outputLayerOutputs[i] + "\n");
+		}
+		
+		System.err.println("Printing outputLayerWeights");
+		for (int i = 0; i < outputs.length; i++) {
+			System.out.print(outputLayerWeights[i] + "\n");
+		}
 		
 	}
 

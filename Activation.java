@@ -53,11 +53,5 @@ public class Activation {
 		System.err.println(connections.keySet());
 		System.out.println(connections);
 		NeuralNet.setConnections(connections);
-		
-		//Activate the Neurons by setting the Training class into index 0 of the Neuron
-		for (Entry<Integer, ArrayList<Object>> beeHive : hive.entrySet()) {
-			beeHive.getValue().set(0, Training.training(beeHive.getKey().intValue()));
-			System.err.println("Neuron ID Number::" + beeHive.getKey().intValue() + "\nNeuron Values::" + beeHive.getValue());
-		}
 	}
 }

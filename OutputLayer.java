@@ -19,6 +19,20 @@ public class OutputLayer {
 	static HashMap<Integer, ArrayList<Object>> beehive;
 	private static double[] outputLayerOutputs;
 	private static double[] outputLayerWeights;
+	
+	/**
+	 * Set our initial output layer weights
+	 */
+	public static void outputLayerInitialWeights () {
+		System.err.println("Generating outputLayer Initial weights...");
+		
+		double[] initial = GenerateWeights.weights(4);
+		for (int iw = 0; iw < initial.length; iw++) {
+			System.err.println("Initial output weights: " + initial[iw]);
+		}
+		OutputLayer.setOutputLayerWeights(initial);
+		NeuralNet.setOutputLayerWeights(initial);
+	}
 
 	/**
 	 * Working with error calculation and adjustment of 
@@ -35,17 +49,16 @@ public class OutputLayer {
 		
 		sum = Summation.summation(desiredOutputs, outputLayerWeights);
 		
-		System.err.println("Adjusting hidden weights and weights of the output layer...");
+		System.err.println("Adjusting hidden weights and weights of the output layer initially no adjustment...");
 		
 		if(sum <= 4) {
-			for (double[] g : inputs) {
-				for (int layer = 0; layer < 4; layer++) {
-					Error.error(inputs[layer], outputLayerOutputs, desiredOutputs, NeuralNet.getHiddenLayerOutputs(), outputLayerWeights, NeuralNet.getLearningrate(), NeuralNet.getHiddenLayerWeights());
-				}
+			//for (double[] g : inputs) {
+			for (int layer = 0; layer < 4; layer++) {
+				Error.error(inputs[layer], outputLayerOutputs, desiredOutputs, NeuralNet.getHiddenLayerOutputs(), outputLayerWeights, NeuralNet.getLearningrate(), NeuralNet.getHiddenLayerWeights());
 			}
 		}
 		
-		System.err.println("Setting our output Layer Ouputs a set of four digits either 1 or 0...");
+		System.err.println("Setting our output Layer Ouputs a set of four digits...");
 
 		double[] outputz = new double[4];
 		
@@ -71,20 +84,6 @@ public class OutputLayer {
 		
 		NeuralNet.setOutputLayerOutputs(outputLayerOutputs);
 		NeuralNet.setOutputLayerWeights(outputLayerWeights);
-	}
-	
-	/**
-	 * Set our initial output layer weights
-	 */
-	public static void outputLayerInitialWeights () {
-		System.err.println("Generating outputLayer Initial weights...");
-		
-		double[] initial = GenerateWeights.weights(4);
-		for (int iw = 0; iw < initial.length; iw++) {
-			System.err.println("Initial output weights: " + initial[iw]);
-		}
-		OutputLayer.setOutputLayerWeights(initial);
-		NeuralNet.setOutputLayerWeights(initial);
 	}
 	
 	//Getters and Setters

@@ -87,7 +87,7 @@ public class HiveNest {
 		NeuralNet.setBeehive(beehive);
 		
 		//Set the value of our first index in the neuron to the training(), that's the brain of the bee...
-		System.err.println("Adding our training module and coordinates ...");
+		System.err.println("Adding our coordinates ...");
 		for (Entry<Integer, ArrayList<Object>> populated : beehive.entrySet()) {
 			
 			int x = GetX.getx(populated.getKey().intValue());
@@ -97,7 +97,7 @@ public class HiveNest {
 			populated.getValue().set(8, x);
 			populated.getValue().set(9, z);
 			populated.getValue().set(10, y);}
-
+		
 		return beehive;
 	}
 

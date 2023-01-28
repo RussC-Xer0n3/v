@@ -35,20 +35,19 @@ public class Training {
 		
 		double[][] input = NeuralNet.getInputs();
 		double[] output = NeuralNet.getDesiredOutput();
-		int t_qty = NeuralNet.getT_qty();
+		int t_qty = 0;
 		double sum = 0;
 		
 		for (int i = 0; i <= t_qty; i++) {
+			
 			// Calculate the error (The difference between the desired output
 			// and the predicted output).
 			for (int in = 0; in <= input.length-1; in++) {
 				Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
 			}
 			
-			
+			//Surmise
 			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
-			
-			
 		}
 		
 		sum -= (sum + sum);

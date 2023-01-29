@@ -86,10 +86,6 @@ public class NeuralNet {
 		//Activate the training Module after generating our connections
 		Activation.activate();
 		
-		//Show our HashMap module information
-		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
-			System.err.println("Hashmap Key:: " + bee.getKey() + " Value::" + bee.getValue() +"");
-		}
 		
 		//Set the training iterations
 		NeuralNet.setT_qty(10000);
@@ -100,9 +96,14 @@ public class NeuralNet {
 			beeHive.getValue().set(0, Training.training(beeHive.getKey().intValue()));
 		}
 
+		//Show our HashMap module information
+		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
+			System.err.println("Hashmap Key:: " + bee.getKey() + " Value::" + bee.getValue() +"");
+		}
+		
 		/**
 		 * Nothing is being updated because the Neural network has changed with the
-		 * Radial Basis Network implementation and thus the system needs to be 
+		 * Proximity Basis Network implementation and thus the system needs to be 
 		 * looked into again
 		 */
 		System.err.println("Printing outputLayerOutPuts");

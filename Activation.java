@@ -38,7 +38,9 @@ public class Activation {
 		/* 
 		 * Populate the index of connect with 
 		 * the initial keys and assign 
-		 * the values to connections
+		 * the values to connections based
+		 * on proximity based connectivity
+		 * making use of PointInside.is()
 		 */
 		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
 			for (int p : connect[bee.getKey().intValue()]) {

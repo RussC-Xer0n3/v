@@ -3,6 +3,7 @@ package v;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * The first training module to be extracted and made reusable
@@ -35,10 +36,29 @@ public class Training {
 		
 		double[][] input = NeuralNet.getInputs();
 		double[] output = NeuralNet.getDesiredOutput();
+		HashMap<Integer, Integer> connections = NeuralNet.getConnections();
 		int t_qty = 0;
 		double sum = 0;
 		
 		for (int i = 0; i <= t_qty; i++) {
+			
+			/*
+			 * Each connection index which has a value, cycle through the connections
+			 * based on the ID and make the relevant updates to the weights and feed the
+			 * inputs and outputs through them as a links and clusters of Neurons 
+			 */
+			
+			for (Entry<Integer, Integer> connected : connections.entrySet() ) {
+				int k = connected.getKey();
+				
+				for (k = connected.getKey().intValue(); k < connections.size(); k++) {
+					if () {
+						
+					} else if () {
+						
+					}
+				}
+			}
 			
 			// Calculate the error (The difference between the desired output
 			// and the predicted output).

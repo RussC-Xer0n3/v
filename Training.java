@@ -52,13 +52,11 @@ public class Training {
 				int k = connected.getKey();
 				
 				if (Connected.connected(connected.getValue().intValue()) == true) {
-					while (k == ID) {
-							// Calculate the error (The difference between the desired output
-							// and the predicted output).
-							for (int in = 0; in <= input.length-1; in++) {
-								Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
-							}
-						}
+					// Calculate the error (The difference between the desired output
+					// and the predicted output).
+					for (int in = 0; in <= input.length-1; in++) {
+						Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+					}	
 				}
 			}
 			

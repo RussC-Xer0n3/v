@@ -125,8 +125,12 @@ public class NeuralNet {
 	 * 
 	 * @param sum
 	 */
-	public static void clusterSum(double sum) {		
-		clusterOutputs.add(sum);
+	public static void clusterSum(double sum) {
+		System.out.println(sum);
+		
+		double value = sum;
+		
+		clusterOutputs.add(value);
 	}
 
 	public static int getV_qty() {

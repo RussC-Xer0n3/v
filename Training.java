@@ -21,6 +21,8 @@ public class Training {
 	static double [] hiddenLayerOutputs = NeuralNet.getHiddenLayerWeights();
 	static double [] outputLayerWeights = NeuralNet.getHiddenLayerWeights();
 	static double [] outputLayerOutputs = NeuralNet.getOutputLayerWeights();
+	static ArrayList<Double> clusterOutputs = new ArrayList<>();
+	
 	
 	/**
 	 * Receives Neuron data and performs the training from within the 
@@ -51,6 +53,9 @@ public class Training {
 			for (Entry<Integer, Integer> connected : connections.entrySet() ) {
 				for (int in = 0; in < input.length; in++) {
 					Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+					
+					//Surmise
+					for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
 				}
 			}
 			
@@ -60,14 +65,21 @@ public class Training {
 			 */
 			
 			//TODO collate and surmise for every cluster
-			
-			//Surmise
-			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
+//			while (Connected.connected(ID)) {
+//				for (Entry<Integer, Integer> connection : connections.entrySet() ) {
+//					if (connections.containsValue(ID)) {
+//						Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+//			
+//						//Surmise
+//						for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }			
+//					}
+//				}
+//			}
 		}
 		
 		sum -= (sum + sum);
-		
-		NeuralNet.clusterSum(sum);
+		clusterOutputs.add(sum);
+		NeuralNet.setClusterOutputs(clusterOutputs);
 		
 		return Training.class;
 	}

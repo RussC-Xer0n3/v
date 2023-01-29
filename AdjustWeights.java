@@ -62,15 +62,24 @@ public class AdjustWeights {
         	weights[i] = weights[i] + learning_rate * error * input[i];
     		
 			for (int hl = 0; hl <= hiddenLayerWeights.length-1; hl++) {
+				
+				//Add the weights to hiddenLayerWeights
 				hiddenLayerWeights[hl] = weights[hl];
+
+				//In the entry set
+				for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
+
+					//get the weights as a value
+					double val = (double) bee.getValue().get(7);
+					
+					//Surmise the old with the new
+					double NewWeight = val + weights[hl];
+
+					//replace the old value
+					bee.getValue().set(7, NewWeight);
+				}
 			}
 	    }
-		
-		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
-			for (double hl : hiddenLayerWeights) {
-				bee.getValue().set(7, hiddenLayerWeights[(int) hl]);
-			}
-		}
 		
 		NeuralNet.setHiddenLayerWeights(hiddenLayerWeights);
 	}

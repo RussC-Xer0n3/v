@@ -55,7 +55,7 @@ public class Training {
 					
 					int v = connected.getValue().intValue();
 					
-					while (v != 0) {
+					while (v != -0) {
 						
 						// Calculate the error (The difference between the desired output
 						// and the predicted output).
@@ -68,7 +68,7 @@ public class Training {
 			
 			/*
 			 * We need to do another gradient descent after collating each cluster
-			 * of outputs and surmising them.
+			 * of outputs and surmising them in the Neural Net Interface.
 			 */
 			
 			//TODO collate and surmise for every cluster
@@ -79,7 +79,7 @@ public class Training {
 		
 		sum -= (sum + sum);
 		
-		System.out.println("The summation of accuracy was: %" + sum);
+		NeuralNet.clusterSum(sum);
 		
 		return Training.class;
 	}

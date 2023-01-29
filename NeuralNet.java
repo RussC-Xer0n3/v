@@ -21,6 +21,7 @@ public class NeuralNet {
 	public static double[] hiddenLayerOutputs;
 	private static double[] outputLayerWeights;
 	private static double[] outputLayerOutputs;
+	private static ArrayList<Double> clusterOutputs;
 
 	private static HashMap<Integer, Integer> connections;
 	private static HashMap<Integer, ArrayList<Object>> beehive;
@@ -116,6 +117,16 @@ public class NeuralNet {
 			System.out.print(outputLayerWeights[i] + "\n");
 		}
 		
+	}
+	
+	/**
+	 * Receives summation from Training and sets the value to
+	 * clusterOutputs in NeuralNet.
+	 * 
+	 * @param sum
+	 */
+	public static void clusterSum(double sum) {		
+		clusterOutputs.add(sum);
 	}
 
 	public static int getV_qty() {
@@ -237,5 +248,13 @@ public class NeuralNet {
 	
 	public static void setLearningrate(double learningrate) {
 		NeuralNet.learningrate = learningrate;
+	}
+
+	public static ArrayList<Double> getClusterOutputs() {
+		return clusterOutputs;
+	}
+
+	public static void setClusterOutputs(ArrayList<Double> clusterOutputs) {
+		NeuralNet.clusterOutputs = clusterOutputs;
 	}
 }

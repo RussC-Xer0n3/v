@@ -51,7 +51,7 @@ public class Training {
 			for (Entry<Integer, Integer> connected : connections.entrySet() ) {
 				int k = connected.getKey();
 				
-				for (k = connected.getKey().intValue(); k < connections.size(); k++) {
+				while (ID == k) {
 					if () {
 						
 					} else if () {

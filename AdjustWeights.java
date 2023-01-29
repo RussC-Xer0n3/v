@@ -16,10 +16,12 @@ public class AdjustWeights {
 	
 	private static double[] outputLayerWeights;
 	private static double[] hiddenLayerWeights;
+	static double[] out;
 	static HashMap<Integer, ArrayList<Object>> hive;
 	
 	/**
 	 * Update the outputLayerWeights according to the parameters
+	 * and then assign the output thresholds
 	 * @param desiredOutput
 	 * @param input
 	 * @param learning_rate
@@ -30,16 +32,34 @@ public class AdjustWeights {
 		System.err.println("Adjusting weights in the outPut Layer...");
 		
 		double[] weights = new double[outputLayerWeights.length-1];
+		double opt_sum = 0;
 		
-		for (int i = 0; i < desiredOutput.length-1; i++) {
+		for (int i = 0; i < desiredOutput.length-1; i++) { //for every desired output i
 	        	
-        	weights[i] = weights[i] + learning_rate * error * input[i];
-    		
+        	weights[i] = weights[i] + learning_rate * error * input[i]; //recalculate the weights
+    	
+        	//Update the weights
 			for (int hl = 0; hl <= outputLayerWeights.length-1; hl++) {
 				outputLayerWeights[hl] = weights[hl];
+			
+				/*
+				 * Cycle through the outputLayerWeights and get a sum
+				 * Assign to Array
+				 */
+				opt_sum += outputLayerWeights[hl]; 
 			}
-	    }
-		
+			
+			//Divide the sum per ith iteration
+			opt_sum /= 4;
+			
+			//get the Threshold per ith iteration
+			if (Threshold.threshold(opt_sum) == 1) {
+				out[i] = 1;
+			} else {
+				out[i] = 0;
+			}
+		}
+		NeuralNet.setOutputLayerOutputs(out);
 		NeuralNet.setOutputLayerWeights(outputLayerWeights);
 	}
 	

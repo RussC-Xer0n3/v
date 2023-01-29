@@ -52,19 +52,20 @@ public class Training {
 				int k = connected.getKey();
 				
 				while (ID == k) {
-					if () {
+					
+					int v = connected.getValue().intValue();
+					
+					while (v != 0) {
 						
-					} else if () {
-						
+						// Calculate the error (The difference between the desired output
+						// and the predicted output).
+						for (int in = 0; in <= input.length-1; in++) {
+							Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+						}
 					}
 				}
 			}
 			
-			// Calculate the error (The difference between the desired output
-			// and the predicted output).
-			for (int in = 0; in <= input.length-1; in++) {
-				Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
-			}
 			
 			//Surmise
 			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }

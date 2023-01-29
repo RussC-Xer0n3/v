@@ -66,6 +66,12 @@ public class Training {
 				}
 			}
 			
+			/*
+			 * We need to do another gradient descent after collating each cluster
+			 * of outputs and surmising them.
+			 */
+			
+			//TODO collate and surmise for every cluster
 			
 			//Surmise
 			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }

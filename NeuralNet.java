@@ -21,6 +21,9 @@ public class NeuralNet {
 	public static double[] hiddenLayerOutputs;
 	private static double[] outputLayerWeights;
 	private static double[] outputLayerOutputs;
+	private static ArrayList<Double> hiddenWeights = new ArrayList<>();;
+	private static ArrayList<Double> hiddenOut = new ArrayList<>();
+
 	private static ArrayList<Double> clusterOutputs;
 
 	private static HashMap<Integer, Integer> connections;
@@ -56,45 +59,76 @@ public class NeuralNet {
 		NeuralNet.setOutputs(outputs);
 		
 		//set the desired output
-		System.err.println("Setting the desired output...");
+		System.err.println("Setting the desired output..." + "\n");
 		NeuralNet.setDesiredOutput(out);
 
 		//set the inputs
-		System.err.println("Setting the inputs...");
+		System.err.println("Setting the inputs..." + "\n");
 		NeuralNet.setInputs(in);
 		
 		//Generate out output layer outputs as 0 to start with...
-		System.err.println("Setting the outputLayer outputs to 0");
+		System.err.println("Setting the outputLayer outputs to 0" + "\n");
 		NeuralNet.setOutputLayerOutputs(NeuralNet.getOutputs());
 		
 		//Set our outputLayer Weights
 		OutputLayer.outputLayerInitialWeights();
+		
+		System.err.println("Printing initial output" + "\n");
+		for (int h = 0; h < outputs.length; h++) {
+			System.err.print(Threshold.threshold(outputLayerWeights[h]));
+		}
+
+		System.err.println("\n");
+		
+		//Add our output layer weights to an ArrayList
+		for (int o = 0;  o < outputLayerWeights.length; o++) {
+			
+			hiddenOut.add(outputLayerWeights[o]);
+			
+		}
+		
+		System.err.println("Output Layer ArrayList::" + hiddenOut + "\n");
 		
 		//Set our outputLayer initial values
 		OutputLayer.output();
 		
 		//Generate the weights per Neuron and set them
 		NeuralNet.setHiddenLayerWeights(GenerateWeights.weights(NeuralNet.getN_qty()));
-		System.err.println("Generated hidden layer Weights...");
+		System.err.println("Generated hidden layer Weights..." + "\n");
 		
 		//Generate our BeeHive
-		System.err.println("Generating HashMap of Neurons...");
+		System.err.println("Generating HashMap of Neurons..." + "\n");
 		HiveNest.mapping(NeuralNet.getNeuron(), n_qty, v_qty);
 		
 		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
 		HiddenLayerWeights.hidden();
 		
-		//Activate the training Module after generating our connections
+		//Activate the connection Module after generating our connections
 		Activation.activate();
 		
+		//Assign our weights from our connections to an ArrayList
+		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
+				
+			if (connections.containsKey(bee.getKey().intValue())) {
+				
+				hiddenWeights.add((double) bee.getValue().get(7));
+				
+			} else if (connections.containsValue(bee.getKey().intValue())) {
+				
+				hiddenWeights.add((double) bee.getValue().get(7));
+				
+			}
+		}
+		
+		System.err.println("Hidden Connected Weights::" + hiddenWeights + "\n");
 		
 		//Set the training iterations
 		NeuralNet.setT_qty(10000);
 		
 		//Activate the Neurons by setting the Training class into index 0 of the Neuron
-		System.err.println("Activating training module...");
+		System.err.println("Adding training module...");
 		for (Entry<Integer, ArrayList<Object>> beeHive : beehive.entrySet()) {
-			beeHive.getValue().set(0, Training.training(beeHive.getKey().intValue()));
+			beeHive.getValue().add(0, Training.training(beeHive.getKey().intValue()));
 		}
 
 		//Show our HashMap module information
@@ -106,17 +140,7 @@ public class NeuralNet {
 		 * Nothing is being updated because the Neural network has changed with the
 		 * Proximity Basis Network implementation and thus the system needs to be 
 		 * looked into again
-		 */
-		System.err.println("Printing outputLayerOutPuts");
-		for (int i = 0; i < outputs.length; i++) {
-			System.out.print(outputLayerOutputs[i] + "\n");
-		}
-		
-		System.err.println("Printing outputLayerWeights");
-		for (int i = 0; i < outputs.length; i++) {
-			System.out.print(outputLayerWeights[i] + "\n");
-		}
-		
+		 */	
 	}
 	
 	/**
@@ -260,5 +284,21 @@ public class NeuralNet {
 
 	public static void setClusterOutputs(ArrayList<Double> clusterOutputs) {
 		NeuralNet.clusterOutputs = clusterOutputs;
+	}
+	
+	public static ArrayList<Double> getHiddenWeights() {
+		return hiddenWeights;
+	}
+	
+	public static void setHiddenWeights(ArrayList<Double> hiddenWeights) {
+		NeuralNet.hiddenWeights = hiddenWeights;
+	}
+	
+	public static ArrayList<Double> getHiddenOut() {
+		return hiddenOut;
+	}
+	
+	public static void setHiddenOut(ArrayList<Double> hiddenOut) {
+		NeuralNet.hiddenOut = hiddenOut;
 	}
 }

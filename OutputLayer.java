@@ -75,13 +75,7 @@ public class OutputLayer {
 			}
 		}
 
-		OutputLayer.setOutputLayerOutputs(outputz);
-		
-		for (int iw = 0; iw < outputLayerOutputs.length; iw++) {
-			System.err.println("Initial output Outputs: " + (int) outputLayerOutputs[iw]);
-			System.err.println("Initial output weights: " + outputLayerWeights[iw]);
-		}
-		
+		OutputLayer.setOutputLayerOutputs(outputz);		
 		NeuralNet.setOutputLayerOutputs(outputLayerOutputs);
 		NeuralNet.setOutputLayerWeights(outputLayerWeights);
 	}

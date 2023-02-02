@@ -36,11 +36,11 @@ public class Error {
 	            //calculate the error for each hidden layer neuron
 	            for (int k = 0; k < hiddenLayerOutputs.length; k++) {
 	                //hidden layer neuron error is always 0 since output layer outputs is binary
-	                double hiddenLayerNeuronError = outputLayerOutputs[b] * (1 - outputLayerOutputs[b]) * outputLayerWeights[b] * outputLayerNeuronError; //Last outputLayerWeights were [b][k] not [k]
+	                double hiddenLayerNeuronError = SigmoidDerivative.sigmoid_d(hiddenLayerOutputs[b]);//Last outputLayerWeights were [b][k] not [k]
 	                //adjust the output layer weights
-	                AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, learningRate, outputLayerNeuronError);
+	                AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, outputLayerNeuronError);
 	                //adjust the hidden layer weights
-	                AdjustWeights.adjustHiddenWeights(hiddenLayerWeights, input, learningRate, hiddenLayerNeuronError);
+	                AdjustWeights.adjustHiddenWeights(hiddenLayerWeights, input, hiddenLayerNeuronError);
 	            }
 	
 	        }

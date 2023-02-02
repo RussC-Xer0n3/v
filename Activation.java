@@ -33,7 +33,7 @@ public class Activation {
 		// Create a secondary HashMap for content storage to iterate over later
 		HashMap<Integer, Integer> connections = new HashMap<>();
 
-		System.out.println("Starting our activation module for proximities and the training program...");
+		System.out.println("\nStarting our activation module for proximities and the training program...\n");
 		
 		/* 
 		 * Populate the index of connect with 
@@ -51,9 +51,9 @@ public class Activation {
 			}
 		}
 			
-		System.err.println(connections.values());
-		System.err.println(connections.keySet());
-		System.out.println(connections);
+		System.err.println(connections.values() + "\n");
+		System.err.println(connections.keySet() + "\n");
+		System.out.println(connections + "\n");
 		NeuralNet.setConnections(connections);
 	}
 }

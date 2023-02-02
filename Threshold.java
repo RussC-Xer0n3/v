@@ -22,7 +22,7 @@ public class Threshold {
 	public static int threshold(double sum) {
 	    int res = 0;
 	    
-	    if (sum >= 0.5) {
+	    if (sum <= -0.5) {
 	        res = 1;
 	    }
 	    

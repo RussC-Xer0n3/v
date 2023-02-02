@@ -31,9 +31,10 @@ public class HiddenLayerWeights {
 		//Go through and put each weight value from each cell into an array
 		double [] weights = new double[NeuralNet.getN_qty()];
 		
-		for (Entry<Integer, ArrayList<Object>> cells : beehive.entrySet()) {
-			for (int hlw = 0; hlw <= NeuralNet.getN_qty()-1; hlw++) {
+		for (int hlw = 0; hlw <= beehive.size(); hlw++) {
+			for (Entry<Integer, ArrayList<Object>> cells : beehive.entrySet()) {
 				weights[hlw] = (double) cells.getValue().get(7);
+				hlw++;
 			}
 		}
 		

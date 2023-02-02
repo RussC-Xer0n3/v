@@ -21,7 +21,6 @@ public class Training {
 	static double [] hiddenLayerOutputs = NeuralNet.getHiddenLayerWeights();
 	static double [] outputLayerWeights = NeuralNet.getHiddenLayerWeights();
 	static double [] outputLayerOutputs = NeuralNet.getOutputLayerWeights();
-	static ArrayList<Double> clusterOutputs = new ArrayList<>();
 	
 	
 	/**
@@ -39,7 +38,7 @@ public class Training {
 		double[][] input = NeuralNet.getInputs();
 		double[] output = NeuralNet.getDesiredOutput();
 		HashMap<Integer, Integer> connections = NeuralNet.getConnections();
-		int t_qty = 0;
+		int t_qty = NeuralNet.getT_qty();
 		double sum = 0;
 		
 		for (int i = 0; i <= t_qty; i++) {
@@ -49,13 +48,18 @@ public class Training {
 			 * based on the ID and make the relevant updates to the weights and feed the
 			 * inputs and outputs through them as a links and clusters of Neurons 
 			 */
-			
-			for (Entry<Integer, Integer> connected : connections.entrySet() ) {
-				for (int in = 0; in < input.length; in++) {
-					Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+			for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet()) {
+				
+				for (Entry<Integer, Integer> connected : connections.entrySet()) {
+				
+					for (int in = 0; in < input.length; in++) {
 					
-					//Surmise
-					for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
+						if (connected.equals(bee.getKey()) || connected.equals(bee.getValue())) {
+							Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
+						}
+						//Surmise
+						for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, NeuralNet.getOutputLayerWeights()); }
+					}
 				}
 			}
 			
@@ -78,8 +82,7 @@ public class Training {
 		}
 		
 		sum -= (sum + sum);
-		clusterOutputs.add(sum);
-		NeuralNet.setClusterOutputs(clusterOutputs);
+		System.out.println(sum);
 		
 		return Training.class;
 	}

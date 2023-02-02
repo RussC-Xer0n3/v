@@ -23,9 +23,8 @@ public class NeuralNet {
 	private static double[] outputLayerOutputs;
 	private static ArrayList<Double> hiddenWeights = new ArrayList<>();;
 	private static ArrayList<Double> hiddenOut = new ArrayList<>();
-
-	private static ArrayList<Double> clusterOutputs;
-
+	private static double[][] in = {};
+	private static double[] out = {};
 	private static HashMap<Integer, Integer> connections;
 	private static HashMap<Integer, ArrayList<Object>> beehive;
 	private static ArrayList<Object> neuron;
@@ -41,15 +40,9 @@ public class NeuralNet {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("null")
-	public static void main(String[] args) throws IOException {
-		//Example initialisation - consider //TODO: byte data type
-		
-		NeuralNet.setN_qty(32);
-		NeuralNet.setV_qty(4);
-		
-		double[][] in = {{1000}, {0111}, {0101}, {1001}, {0110}};
-		double[] out = {0111};
-		outputs = new double[4];
+	public static void net() throws IOException {
+		//Example initialisation - consider //TODO: byte data type		
+		outputs = new double[in.length-1];
 		
 		for (int outs = 0; outs < 4; outs++) {
 			outputs[outs] = 0;
@@ -135,26 +128,6 @@ public class NeuralNet {
 		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
 			System.err.println("Hashmap Key:: " + bee.getKey() + " Value::" + bee.getValue() +"");
 		}
-		
-		/**
-		 * Nothing is being updated because the Neural network has changed with the
-		 * Proximity Basis Network implementation and thus the system needs to be 
-		 * looked into again
-		 */	
-	}
-	
-	/**
-	 * Receives summation from Training and sets the value to
-	 * clusterOutputs in NeuralNet.
-	 * 
-	 * @param sum
-	 */
-	public static void clusterSum(double sum) {
-		System.out.println(sum);
-		
-		double value = sum;
-		
-		clusterOutputs.add(value);
 	}
 
 	public static int getV_qty() {
@@ -277,14 +250,6 @@ public class NeuralNet {
 	public static void setLearningrate(double learningrate) {
 		NeuralNet.learningrate = learningrate;
 	}
-
-	public static ArrayList<Double> getClusterOutputs() {
-		return clusterOutputs;
-	}
-
-	public static void setClusterOutputs(ArrayList<Double> clusterOutputs) {
-		NeuralNet.clusterOutputs = clusterOutputs;
-	}
 	
 	public static ArrayList<Double> getHiddenWeights() {
 		return hiddenWeights;
@@ -300,5 +265,21 @@ public class NeuralNet {
 	
 	public static void setHiddenOut(ArrayList<Double> hiddenOut) {
 		NeuralNet.hiddenOut = hiddenOut;
+	}
+	
+	public static double[][] getIn() {
+		return in;
+	}
+	
+	public static void setIn(double[][] in) {
+		NeuralNet.in = in;
+	}
+	
+	public static double[] getOut() {
+		return out;
+	}
+	
+	public static void setOut(double[] out) {
+		NeuralNet.out = out;
 	}
 }

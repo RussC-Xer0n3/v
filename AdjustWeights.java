@@ -79,6 +79,8 @@ public class AdjustWeights {
 	
 	/**
 	 * Repopulate the weights after they have been adjusted in the hidden layer
+	 * we need both the hidden layer weights and the weights in the Neural Net to 
+	 * be updated even though the hiddenLayerWeights are representative
 	 * 
 	 * @param desiredOutput
 	 * @param input

@@ -18,7 +18,7 @@ public class AdjustWeights {
 	private static double[] hiddenLayerWeights;
 	static double[] out;
 	static HashMap<Integer, ArrayList<Object>> hive = NeuralNet.getBeehive();
-	static double learning_rate = Sigmoid.sigmoidFunction(NeuralNet.getLearningrate());
+	static double learning_rate = NeuralNet.getLearningrate();
 	static ArrayList<Double> hiddenOut = NeuralNet.getHiddenOut();
 	static ArrayList<Double> hiddenWeights = NeuralNet.getHiddenWeights();
 	static HashMap<Integer, Integer> connections = NeuralNet.getConnections();

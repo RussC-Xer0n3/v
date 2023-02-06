@@ -28,13 +28,14 @@ public class Main {
 		connections = NeuralNet.getConnections();
 		
 		//Initialise the Training
+		System.err.println("Initialising training module...");
 		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
 			for (Entry<Integer, Integer> connections : connections.entrySet()) {
-				if (connections.equals(bee.getKey()) || connections.equals(bee.getValue())) {
 				
-					Training.training(bee.getKey());
+					bee.getValue().set(0, Training.training(bee.getKey().intValue()));
 				}
 			}
 		}
+		
 	}
 }

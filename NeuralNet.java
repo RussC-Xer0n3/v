@@ -114,20 +114,6 @@ public class NeuralNet {
 		}
 		
 		System.err.println("Hidden Connected Weights::" + hiddenWeights + "\n");
-		
-		//Set the training iterations
-		NeuralNet.setT_qty(10000);
-		
-		//Activate the Neurons by setting the Training class into index 0 of the Neuron
-		System.err.println("Adding training module...");
-		for (Entry<Integer, ArrayList<Object>> beeHive : beehive.entrySet()) {
-			beeHive.getValue().add(0, Training.training(beeHive.getKey().intValue()));
-		}
-
-		//Show our HashMap module information
-		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
-			System.err.println("Hashmap Key:: " + bee.getKey() + " Value::" + bee.getValue() +"");
-		}
 	}
 
 	public static int getV_qty() {

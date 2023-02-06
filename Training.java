@@ -57,7 +57,7 @@ public class Training {
 		}
 		
 		sum -= (sum + sum);
-		System.out.println(sum);
+		NeuralNet.setSum(sum);
 		
 		return Training.class;
 	}

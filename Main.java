@@ -33,7 +33,9 @@ public class Main {
 			for (Entry<Integer, Integer> connections : connections.entrySet()) {
 				
 					bee.getValue().set(0, Training.training(bee.getKey().intValue()));
-				}
 			}
+		}
+		
+		System.out.println(NeuralNet.getSum());
 	}
 }

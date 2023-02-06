@@ -33,8 +33,17 @@ public class NeuralNet {
 	private static double learningrate = 1e-4;
 	private static double ouputNeuronError;
 	private static double hiddenNeuronError;
+	private static double sum;
 	
 
+
+	public static double getSum() {
+		return sum;
+	}
+
+	public static void setSum(double sum) {
+		NeuralNet.sum = sum;
+	}
 
 	/**
 	 * The main entry point for our program

@@ -31,8 +31,7 @@ public class AdjustWeights {
 	 * @param error
 	 */
 	public static void adjustOutputWeights(double[] desiredOutput, double[] input, double error) {
-
-		System.err.println("Adjusting weights in the outPut Layer...");		
+	
 		double[] weights = new double[desiredOutput.length];
 		
 		for (int i = 0; i < desiredOutput.length; i++) { //for every desired output i
@@ -67,8 +66,6 @@ public class AdjustWeights {
 	 * @param error
 	 */
 	public static void adjustHiddenWeights(double[] desiredOutput, double[] input, double error) {
-
-		System.err.println("Adjusting weights in the hidden Layer...");
 		
 		for (int i = 0; i < desiredOutput.length; i++) {
 	        	
@@ -80,26 +77,6 @@ public class AdjustWeights {
 				hiddenLayerWeights[hl] = input[hl];
 			}
 	    }
-		
-		for (int i = 0; i < desiredOutput.length-1; i++) {
-			//go through the connections in the arrayList, update the weights and assign them to the correct value (bee)
-			for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
-				
-				for (Entry<Integer, Integer> connection : connections.entrySet()) {
-				
-					if (connection.equals(bee.getKey()) || connection.equals(bee.getValue())) {
-						
-						//summise the weights
-						double old_weight = (double) bee.getValue().get(7);
-						
-						double new_weight = old_weight + learning_rate * error * input[i];
-						
-						//Set the new weight
-						bee.getValue().set(7, new_weight);
-					}
-				}
-			}
-		}
 		
 		NeuralNet.setHiddenLayerWeights(hiddenLayerWeights);
 	}

@@ -34,11 +34,10 @@ public class AdjustWeights {
 
 		System.err.println("Adjusting weights in the outPut Layer...");		
 		double[] weights = new double[desiredOutput.length];
-		double[] weight = new double[desiredOutput.length];
 		
 		for (int i = 0; i < desiredOutput.length; i++) { //for every desired output i
 	        	
-        	weights[i] = weight[i] + learning_rate * error * input[i]; //recalculate the weights
+        	weights[i] = input[i] + learning_rate * error * desiredOutput[i]; //recalculate the weights
         	
         	//Clear the ArrayList and assign new weights
         	hiddenOut.clear();
@@ -71,16 +70,14 @@ public class AdjustWeights {
 
 		System.err.println("Adjusting weights in the hidden Layer...");
 		
-		double[] weights = new double[desiredOutput.length];
-		
-		for (int i = 0; i < desiredOutput.length-1; i++) {
+		for (int i = 0; i < desiredOutput.length; i++) {
 	        	
-        	weights[i] = weights[i] + learning_rate * error * input[i];
+        	input[i] = input[i] + learning_rate * error * desiredOutput[i];
     		
 			for (int hl = 0; hl <= hiddenLayerWeights.length-1; hl++) {
 				
 				//Add the weights to hiddenLayerWeights
-				hiddenLayerWeights[hl] = weights[hl];
+				hiddenLayerWeights[hl] = input[hl];
 			}
 	    }
 		

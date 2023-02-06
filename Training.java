@@ -48,17 +48,9 @@ public class Training {
 			 * based on the ID and make the relevant updates to the weights and feed the
 			 * inputs and outputs through them as a links and clusters of Neurons 
 			 */
-			for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet()) {
-				
-				for (Entry<Integer, Integer> connected : connections.entrySet()) {
-				
-					for (int in = 0; in < input.length; in++) {
-					
-						if (connected.equals(bee.getKey()) || connected.equals(bee.getValue())) {
-							Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
-						}
-					}
-				}
+			
+			for (int in = 0; in < input.length; in++) {
+				Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
 			}
 			
 			//adjust the output layer weights

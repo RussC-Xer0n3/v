@@ -26,21 +26,33 @@ public class Error {
 	 * @param hiddenLayerWeights
 	 */
 	public static void error(double[] input, double[] outputLayerOutputs, double[] desiredOutput, double[] hiddenLayerOutputs, double[] outputLayerWeights, double learningRate, double[] hiddenLayerWeights) {
-		//calculate the error in each outputlayer neuron
-	    //loop through the output layer outputs
+		double output = 0;
+		double hidden = 0;
+		
+		/**calculate the error in each outputlayer neuron
+	     *loop through the output layer outputs
+	     */
 	    for (int b = 0; b < desiredOutput.length-1; b++) {
 	        //compare each value with the desired outputs mapping to find the error
 	        if (outputLayerOutputs[b] != desiredOutput[b]) {
 	            //calculate the error for each output layer neuron (linear gradient descent)
 	            double outputLayerNeuronError = desiredOutput[b] - outputLayerOutputs[b];
+	            
+	            output += outputLayerNeuronError;
+	             
+	            output /= desiredOutput.length-1;
+	            
+	            NeuralNet.setOuputNeuronError(output);
 	            //calculate the error for each hidden layer neuron
-	            for (int k = 0; k < hiddenLayerOutputs.length; k++) {
+	            for (int k = 0; k < hiddenLayerOutputs.length-1; k++) {
 	                //hidden layer neuron error is always 0 since output layer outputs is binary
 	                double hiddenLayerNeuronError = SigmoidDerivative.sigmoid_d(hiddenLayerOutputs[b]);//Last outputLayerWeights were [b][k] not [k]
-	                //adjust the output layer weights
-	                AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, outputLayerNeuronError);
-	                //adjust the hidden layer weights
-	                AdjustWeights.adjustHiddenWeights(hiddenLayerWeights, input, hiddenLayerNeuronError);
+	                
+	                hidden += hiddenLayerNeuronError;
+		             
+		            hidden /= hiddenLayerOutputs.length-1;
+		            
+		            NeuralNet.setHiddenNeuronError(hidden);
 	            }
 	
 	        }

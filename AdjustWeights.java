@@ -14,9 +14,8 @@ import java.util.ArrayList;
  */
 public class AdjustWeights {
 	
-	private static double[] outputLayerWeights;
-	private static double[] hiddenLayerWeights;
-	static double[] out;
+	private static double[] outputLayerWeights = NeuralNet.getOutputLayerWeights();
+	private static double[] hiddenLayerWeights = NeuralNet.getHiddenLayerWeights();
 	static HashMap<Integer, ArrayList<Object>> hive = NeuralNet.getBeehive();
 	static double learning_rate = NeuralNet.getLearningrate();
 	static ArrayList<Double> hiddenOut = NeuralNet.getHiddenOut();
@@ -26,20 +25,18 @@ public class AdjustWeights {
 	/**
 	 * Update the outputLayerWeights according to the parameters
 	 * and then assign the output thresholds
-	 * @param desiredOutput
-	 * @param input
+	 * @param desiredOutput - outputLayerWeights
+	 * @param input - hiddenOutput
 	 * @param learning_rate
 	 * @param error
 	 */
 	public static void adjustOutputWeights(double[] desiredOutput, double[] input, double error) {
 
-		System.err.println("Adjusting weights in the outPut Layer...");
+		System.err.println("Adjusting weights in the outPut Layer...");		
+		double[] weights = new double[desiredOutput.length];
+		double[] weight = new double[desiredOutput.length];
 		
-		double[] weights = new double[outputLayerWeights.length-1];
-		double[] weight = new double[outputLayerWeights.length-1];
-		double opt_sum = 0;
-		
-		for (int i = 0; i < desiredOutput.length-1; i++) { //for every desired output i
+		for (int i = 0; i < desiredOutput.length; i++) { //for every desired output i
 	        	
         	weights[i] = weight[i] + learning_rate * error * input[i]; //recalculate the weights
         	
@@ -52,26 +49,9 @@ public class AdjustWeights {
 				outputLayerWeights[hl] = weights[hl];
 				
 				hiddenOut.add(weights[i]);
-			
-				/*
-				 * Cycle through the outputLayerWeights and get a sum
-				 * Assign to Array
-				 */
-				opt_sum += outputLayerWeights[hl]; 
-			}
-			
-			//Divide the sum per ith iteration
-			opt_sum /= 4;
-			
-			//get the Threshold per ith iteration
-			if (Threshold.threshold(opt_sum) == 1) {
-				out[i] = 1;
-			} else {
-				out[i] = 0;
 			}
 		}
 		
-		NeuralNet.setOutputLayerOutputs(out);
 		NeuralNet.setOutputLayerWeights(outputLayerWeights); //Array
 		NeuralNet.setHiddenOut(hiddenOut); //ArrayList
 		
@@ -91,7 +71,7 @@ public class AdjustWeights {
 
 		System.err.println("Adjusting weights in the hidden Layer...");
 		
-		double[] weights = new double[hiddenWeights.size()];
+		double[] weights = new double[desiredOutput.length];
 		
 		for (int i = 0; i < desiredOutput.length-1; i++) {
 	        	

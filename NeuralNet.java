@@ -18,7 +18,7 @@ public class NeuralNet {
 	private static double[][] inputs;
 	private static double[] desiredOutput;
 	private static double[] hiddenLayerWeights;
-	public static double[] hiddenLayerOutputs;
+	private static double[] hiddenLayerOutputs;
 	private static double[] outputLayerWeights;
 	private static double[] outputLayerOutputs;
 	private static ArrayList<Double> hiddenWeights = new ArrayList<>();;
@@ -31,7 +31,10 @@ public class NeuralNet {
 	private static double adjusted;
 	private static double[] outputs;
 	private static double learningrate = 1e-4;
+	private static double ouputNeuronError;
+	private static double hiddenNeuronError;
 	
+
 
 	/**
 	 * The main entry point for our program
@@ -267,5 +270,21 @@ public class NeuralNet {
 	
 	public static void setOut(double[] out) {
 		NeuralNet.out = out;
+	}
+	
+	public static double getOuputNeuronError() {
+		return ouputNeuronError;
+	}
+	
+	public static void setOuputNeuronError(double ouputNeuronError) {
+		NeuralNet.ouputNeuronError = ouputNeuronError;
+	}
+	
+	public static double getHiddenNeuronError() {
+		return hiddenNeuronError;
+	}
+	
+	public static void setHiddenNeuronError(double hiddenNeuronError) {
+		NeuralNet.hiddenNeuronError = hiddenNeuronError;
 	}
 }

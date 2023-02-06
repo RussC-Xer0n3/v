@@ -35,7 +35,5 @@ public class Main {
 					bee.getValue().set(0, Training.training(bee.getKey().intValue()));
 				}
 			}
-		}
-		
 	}
 }

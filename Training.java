@@ -57,28 +57,19 @@ public class Training {
 						if (connected.equals(bee.getKey()) || connected.equals(bee.getValue())) {
 							Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
 						}
-						//Surmise
-						for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, NeuralNet.getOutputLayerWeights()); }
 					}
 				}
 			}
 			
-			/*
-			 * We need to do another gradient descent after collating each cluster
-			 * of outputs and surmising them in the Neural Net Interface.
-			 */
-			
-			//TODO collate and surmise for every cluster
-//			while (Connected.connected(ID)) {
-//				for (Entry<Integer, Integer> connection : connections.entrySet() ) {
-//					if (connections.containsValue(ID)) {
-//						Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);
-//			
-//						//Surmise
-//						for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }			
-//					}
-//				}
-//			}
+			//adjust the output layer weights
+	        AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, NeuralNet.getOuputNeuronError());
+	        
+	        //adjust the hidden layer weights
+	        for (int in = 0; in < input.length; in++) {
+	        	AdjustWeights.adjustHiddenWeights(hiddenLayerWeights, input[in], NeuralNet.getHiddenNeuronError());
+	        }
+	        		
+			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
 		}
 		
 		sum -= (sum + sum);

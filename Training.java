@@ -37,17 +37,10 @@ public class Training {
 		
 		double[][] input = NeuralNet.getInputs();
 		double[] output = NeuralNet.getDesiredOutput();
-		HashMap<Integer, Integer> connections = NeuralNet.getConnections();
 		int t_qty = NeuralNet.getT_qty();
 		double sum = 0;
 		
 		for (int i = 0; i <= t_qty; i++) {
-			
-			/*
-			 * Each connection index which has a value, cycle through the connections
-			 * based on the ID and make the relevant updates to the weights and feed the
-			 * inputs and outputs through them as a links and clusters of Neurons 
-			 */
 			
 			for (int in = 0; in < input.length; in++) {
 				Error.error(input[in], outputLayerOutputs, output, hiddenLayerOutputs, outputLayerWeights, learningrate, hiddenLayerWeights);

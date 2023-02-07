@@ -19,8 +19,8 @@ public class Training {
 	static double learningrate = NeuralNet.getLearningrate();
 	static double [] hiddenLayerWeights = NeuralNet.getHiddenLayerWeights();
 	static double [] hiddenLayerOutputs = NeuralNet.getHiddenLayerWeights();
-	static double [] outputLayerWeights = NeuralNet.getHiddenLayerWeights();
-	static double [] outputLayerOutputs = NeuralNet.getOutputLayerWeights();
+	static double [] outputLayerWeights = NeuralNet.getOutputLayerWeights();
+	static double [] outputLayerOutputs = NeuralNet.getOutputLayerOutputs();
 	
 	
 	/**
@@ -47,16 +47,17 @@ public class Training {
 			}
 			
 			//adjust the output layer weights
-	        AdjustWeights.adjustOutputWeights(outputLayerWeights, hiddenLayerOutputs, NeuralNet.getOuputNeuronError());
+	        AdjustWeights.adjustHiddenWeights(outputLayerWeights, hiddenLayerOutputs, NeuralNet.getOuputNeuronError());
 	        
 	        //adjust the hidden layer weights
 	        AdjustWeights.adjustHiddenWeights(output, hiddenLayerWeights, NeuralNet.getHiddenNeuronError());
 	        
 	        		
 			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
+
+			sum -= (sum + sum);
 		}
 		
-		sum -= (sum + sum);
 		NeuralNet.setSum(sum);
 		
 		return Training.class;

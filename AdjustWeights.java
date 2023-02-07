@@ -14,52 +14,7 @@ import java.util.ArrayList;
  */
 public class AdjustWeights {
 	
-	private static double[] outputLayerWeights = NeuralNet.getOutputLayerWeights();
-	private static double[] hiddenLayerWeights = NeuralNet.getHiddenLayerWeights();
-	static HashMap<Integer, ArrayList<Object>> hive = NeuralNet.getBeehive();
 	static double learning_rate = NeuralNet.getLearningrate();
-	static ArrayList<Double> hiddenOut = NeuralNet.getHiddenOut();
-	static ArrayList<Double> hiddenWeights = NeuralNet.getHiddenWeights();
-	static HashMap<Integer, Integer> connections = NeuralNet.getConnections();
-	
-	/**
-	 * Update the outputLayerWeights according to the parameters
-	 * and then assign the output thresholds
-	 * @param desiredOutput - outputLayerWeights
-	 * @param input - hiddenOutput
-	 * @param learning_rate
-	 * @param error
-	 */
-	public static void adjustOutputWeights(double[] desiredOutput, double[] input, double error) {
-	
-		double[] weights = new double[desiredOutput.length];
-		
-		for (int i = 0; i < input.length; i++) {
-	        if (i < weights.length) {
-	            weights[i] = weights[i] + learning_rate * error * input[i];
-	        }
-	    }
-//		
-//		for (int i = 0; i < desiredOutput.length; i++) { //for every desired output i
-//	        	
-//        	weights[i] = input[i] + learning_rate * error * desiredOutput[i]; //recalculate the weights
-//        	
-//        	//Clear the ArrayList and assign new weights
-//        	hiddenOut.clear();
-//        	
-//        	//Update the weights
-//			for (int hl = 0; hl <= outputLayerWeights.length-1; hl++) {
-//
-//				outputLayerWeights[hl] = weights[hl];
-//				
-//				hiddenOut.add(weights[i]);
-//			}
-//		}
-		
-		NeuralNet.setOutputLayerWeights(weights); //Array
-		//NeuralNet.setHiddenOut(hiddenOut); //ArrayList
-		
-	}
 	
 	/**
 	 * Repopulate the weights after they have been adjusted in the hidden layer
@@ -80,50 +35,7 @@ public class AdjustWeights {
 	            weights[i] = weights[i] + learning_rate * error * input[i];
 	        }
 	    }
-//		
-//		for (int i = 0; i < desiredOutput.length; i++) {
-//	        	
-//        	input[i] = input[i] + learning_rate * error * desiredOutput[i];
-//    		
-//			for (int hl = 0; hl <= hiddenLayerWeights.length-1; hl++) {
-//				
-//				//Add the weights to hiddenLayerWeights
-//				hiddenLayerWeights[hl] = input[hl];
-//			}
-//	    }
 		
 		NeuralNet.setHiddenLayerWeights(weights);
-	}
-
-	/**
-	 * Returns the outputLayerWeights
-	 * @return
-	 */
-	public static double[] getOutputLayerWeights() {
-		return outputLayerWeights;
-	}
-
-	/**
-	 * Sets the OutputLayerWeights
-	 * @param outputLayerWeights
-	 */
-	public static void setOutputLayerWeights(double[] outputLayerWeights) {
-		AdjustWeights.outputLayerWeights = outputLayerWeights;
-	}
-	
-	/**
-	 * Returns the hiddenLayerWeights
-	 * @return
-	 */
-	public static double[] getHiddenLayerWeights() {
-		return hiddenLayerWeights;
-	}
-	
-	/**
-	 * Sets the hiddenLayerWeights
-	 * @param hiddenLayerWeights
-	 */
-	public static void setHiddenLayerWeights(double[] hiddenLayerWeights) {
-		AdjustWeights.hiddenLayerWeights = hiddenLayerWeights;
 	}
 }

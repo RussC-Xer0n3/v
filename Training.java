@@ -51,11 +51,6 @@ public class Training {
 	        
 	        //adjust the hidden layer weights
 	        AdjustWeights.adjustHiddenWeights(output, hiddenLayerWeights, NeuralNet.getHiddenNeuronError());
-	        
-	        		
-			for (int s = 0; s <= input.length-1; s ++) { sum = Summation.summation(output, outputLayerWeights); }
-
-			sum -= (sum + sum);
 		}
 		
 		NeuralNet.setSum(sum);

@@ -11,7 +11,6 @@ import java.util.HashMap;
  * adjustment and use making use of Getters and Setters
  *  
  * @author xer0n3 - developing821@outlook.com - R. Clarke
- * @TDOD complete
  */
 
 public class OutputLayer {
@@ -47,7 +46,7 @@ public class OutputLayer {
 		double[][] inputs = NeuralNet.getInputs();
 		outputLayerWeights = NeuralNet.getOutputLayerWeights();
 		
-		sum = Summation.summation(desiredOutputs, outputLayerWeights);
+		//TODO: summise
 		
 		System.err.println("Adjusting hidden weights and weights of the output layer initially no adjustment...");
 		

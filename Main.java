@@ -10,7 +10,7 @@ public class Main {
 	static HashMap<Integer, Integer> connections;
 	static HashMap<Integer, ArrayList<Object>> hive;
 	
-	public static void main (String []args) throws IOException {
+	public static byte main (String []args) throws IOException {
 		double[][] in = {{1000}, {0111}, {0101}, {1001}, {0110}};
 		double[] out = {0111};
 
@@ -22,6 +22,7 @@ public class Main {
 		
 		//Call the Neural Network
 		NeuralNet.net();
+		int main_out = NeuralNet.getThresholder();
 		
 		//Set the hive here and the connections ready for processing into training
 		hive = NeuralNet.getBeehive();
@@ -37,5 +38,6 @@ public class Main {
 		}
 		
 		System.out.println(NeuralNet.getSum());
+		return (byte) main_out;
 	}
 }

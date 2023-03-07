@@ -1,16 +1,16 @@
 package v;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import com.opencsv.CSVWriter;
-import com.opencsv.CSVWriterBuilder;
+//import java.io.File;
+//import java.io.FileWriter;
+//import java.io.PrintWriter;
+//import java.util.stream.Collectors;
+//import java.util.stream.Stream;
+//import com.opencsv.CSVWriter;
+//import com.opencsv.CSVWriterBuilder;
 
 /**
  * Designed to activate the connectivity Of the Neurons and Training module
@@ -28,7 +28,7 @@ public class Activation {
 	// Get our cubic volume for the storage size of each index
 	static int[][] connect = new int[(int) Math.pow(NeuralNet.getV_qty(), 3)][(int) Math.pow(NeuralNet.getV_qty(), 3)];
 
-	static ArrayList data = new ArrayList<>();
+	//static ArrayList data = new ArrayList<>();
 	
 	/**
 	 * Makes call to Collision detection in PointInside.is() method
@@ -52,35 +52,35 @@ public class Activation {
 		 * making use of PointInside.is()
 		 */
 		
-		File file = new File("C:\\Users\\xer0n3\\eclipse-workspace\\V2\\src\\v\\hive.csv");
+//		File file = new File("C:\\Users\\xer0n3\\eclipse-workspace\\V2\\src\\v\\hive.csv");
+//		
+//		//Instantiating the CSVWriter class
+//		FileWriter outputfile = new FileWriter(file);
+//		
+//		// create CSVWriter object filewriter object as parameter
+//        CSVWriter writer = new CSVWriter(outputfile);
 		
-		//Instantiating the CSVWriter class
-		FileWriter outputfile = new FileWriter(file);
-		
-		// create CSVWriter object filewriter object as parameter
-        CSVWriter writer = new CSVWriter(outputfile);
-		
-		for (int z = 0; z < 50; z++) {
+//		for (int z = 0; z < 50; z++) {
 			//For 1000 times we want data collected to look at the mapping and the connections
 			HiveNest.mapping(NeuralNet.getNeuron(), NeuralNet.getN_qty(), NeuralNet.getV_qty());
 			
 			for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
 				
-				String b = null;
+				//String b = null;
 								
 				for (int p : connect[bee.getKey().intValue()]) {
 					
 					int[] a = PointInside.is(bee.getKey());
-					b = String.valueOf(a[p]);
-					//connections.put(bee.getKey(), a[p]);
+					//b = String.valueOf(a[p]);
+					connections.put(bee.getKey(), a[p]);
 					
 				}
 				
-				data.add(new String[] {String.valueOf(bee.getKey()), b, });
+//				data.add(new String[] {String.valueOf(bee.getKey()), b, });
 			}
-			writer.writeAll(data);
-			data.clear();
-		}
+//			writer.writeAll(data);
+//			data.clear();
+//		}
 		
 		System.err.println(connections.values() + "\n");
 		System.err.println(connections.keySet() + "\n");

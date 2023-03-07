@@ -105,14 +105,8 @@ public class NeuralNet {
 		//Assign our weights from our connections to an ArrayList
 		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
 				
-			if (connections.containsKey(bee.getKey().intValue())) {
-				
-				hiddenWeights.add((double) bee.getValue().get(7));
-				
-			} else if (connections.containsValue(bee.getKey().intValue())) {
-				
-				hiddenWeights.add((double) bee.getValue().get(7));
-				
+			if (Connected.connected(bee.getKey().intValue())) {
+					hiddenWeights.add((double) bee.getValue().indexOf(7));
 			}
 		}
 		

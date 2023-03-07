@@ -37,8 +37,11 @@ public class Communication {
 		double result = 0;
 		
 		for (int j = 0; j <= keys.length-1; j++) {
-			hive.get(keys[j]).get(0); //Training
-			result += (double) hive.get(keys[j]).get(11); //Sum
+			for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet() ) {
+				if (Connected.connected(bee.getKey())) {
+					result += bee.getValue().indexOf(7); //Sum
+				}
+			}
 		}
 		
 		derivative(result, qty, keys);
@@ -64,8 +67,12 @@ public class Communication {
 		double updatedWeight = 0;
 		
 		for (int l = 0; l <= keys.length-1; l++) {
-			double weight = (double) hive.get(keys[l]).get(7);
-			updatedWeight = derivative + weight;
+			for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet() ) {
+				if (Connected.connected(bee.getKey())) {
+					double weight = bee.getValue().indexOf(7);
+					updatedWeight = derivative + weight;
+				}
+			}
 			
 			for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet() ) {
 				if (Connected.connected(bee.getKey())) {

@@ -36,7 +36,7 @@ public class Training {
 		System.err.println("Neuron Training ID::" + ID);
 		
 		double[][] input = NeuralNet.getInputs();
-		double[] output = NeuralNet.getDesiredOutput();
+		double[] output = NeuralNet.getOutputs();
 		int t_qty = NeuralNet.getT_qty();
 		
 		for (int i = 0; i <= t_qty; i++) {

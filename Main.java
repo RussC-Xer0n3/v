@@ -18,7 +18,7 @@ public class Main {
 		NeuralNet.setV_qty(4);
 		NeuralNet.setT_qty(10000);
 		NeuralNet.setIn(in);
-		NeuralNet.setOut(out);
+		NeuralNet.setDesiredOutput(out);
 		
 		//Call the Neural Network
 		NeuralNet.net();
@@ -38,7 +38,7 @@ public class Main {
 			}
 		}
 		
-		System.out.println(NeuralNet.getSum());
+		//System.out.println(NeuralNet.getSum());
 		//Volume2.setInput((byte)main_out);
 	}
 }

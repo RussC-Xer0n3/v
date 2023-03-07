@@ -96,21 +96,23 @@ public class NeuralNet {
 		System.err.println("Generating HashMap of Neurons..." + "\n");
 		HiveNest.mapping(NeuralNet.getNeuron(), n_qty, v_qty);
 		
-		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
-		HiddenLayerWeights.hidden();
+//		//Set our hidden Layer Weights to a value other than 0.0 as initialisers
+//		HiddenLayerWeights.hidden();
+//		
+//		//Assign our weights from our connections to an ArrayList
+//		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
+//			System.out.println(bee.getValue().indexOf(7));
+//			if (Connected.connected(bee.getKey().intValue())) {
+//				
+//				hiddenWeights.add((double) bee.getValue().indexOf(7));
+//			}
+//		}
 		
 		//Activate the connection Module after generating our connections
 		Activation.activate();
 		
-		//Assign our weights from our connections to an ArrayList
-		for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
-				
-			if (Connected.connected(bee.getKey().intValue())) {
-					hiddenWeights.add((double) bee.getValue().indexOf(7));
-			}
-		}
 		
-		System.err.println("Hidden Connected Weights::" + hiddenWeights + "\n");
+//		System.err.println("Hidden Connected Weights::" + hiddenWeights + "\n");
 		
 		return thresholder;
 	}

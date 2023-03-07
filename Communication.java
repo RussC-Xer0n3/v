@@ -19,7 +19,6 @@ public class Communication {
 		
 		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet() ) {
 			if (Connected.connected(bee.getKey())) {
-				System.out.println(bee.getKey());
 				key = bee.getKey().intValue();
 				keys[0] = key;
 			}

@@ -15,36 +15,27 @@ import java.util.Map.Entry;
 public class NeuralNet {
 
 	private static int t_qty, n_qty, v_qty = 0;
-	private static double[][] inputs;
-	private static double[] desiredOutput;
+	private static ArrayList<Object> neuron;
+	private static HashMap<Integer, ArrayList<Object>> beehive;
+	private static HashMap<Integer, Integer> connections;
+	private static ArrayList<Double> hiddenWeights = new ArrayList<>();
+	private static ArrayList<Double> hiddenOut = new ArrayList<>();
 	private static double[] hiddenLayerWeights;
 	private static double[] hiddenLayerOutputs;
 	private static double[] outputLayerWeights;
 	private static double[] outputLayerOutputs;
-	private static ArrayList<Double> hiddenWeights = new ArrayList<>();;
-	private static ArrayList<Double> hiddenOut = new ArrayList<>();
-	private static double[][] in = {};
-	private static double[] out = {};
-	private static HashMap<Integer, Integer> connections;
-	private static HashMap<Integer, ArrayList<Object>> beehive;
-	private static ArrayList<Object> neuron;
-	private static double adjusted;
-	private static double[] outputs;
 	private static double learningrate = 1e-4;
+	private static double adjusted;
 	private static double ouputNeuronError;
 	private static double hiddenNeuronError;
-	private static double sum;
-	
 
-
-	public static double getSum() {
-		return sum;
-	}
-
-	public static void setSum(double sum) {
-		NeuralNet.sum = sum;
-	}
-
+	private static double[][] in = {};
+	private static double[] out = {};
+	private static double[][] inputs;
+	private static double[] outputs;
+	private static double[] desiredOutput;
+	private static double sum;	
+	private static int thresholder;
 	/**
 	 * The main entry point for our program
 	 * 
@@ -52,7 +43,7 @@ public class NeuralNet {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("null")
-	public static void net() throws IOException {
+	public static int net() throws IOException {
 		//Example initialisation - consider //TODO: byte data type		
 		outputs = new double[in.length-1];
 		
@@ -126,6 +117,8 @@ public class NeuralNet {
 		}
 		
 		System.err.println("Hidden Connected Weights::" + hiddenWeights + "\n");
+		
+		return thresholder;
 	}
 
 	public static int getV_qty() {
@@ -295,5 +288,21 @@ public class NeuralNet {
 	
 	public static void setHiddenNeuronError(double hiddenNeuronError) {
 		NeuralNet.hiddenNeuronError = hiddenNeuronError;
+	}
+	
+	public static int getThresholder() {
+		return thresholder;
+	}
+
+	public static void setThresholder(int thresholder) {
+		NeuralNet.thresholder = thresholder;
+	}
+
+	public static double getSum() {
+		return sum;
+	}
+
+	public static void setSum(double sum) {
+		NeuralNet.sum = sum;
 	}
 }

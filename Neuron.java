@@ -77,6 +77,8 @@ public class Neuron {
          
         neuron.add(0); // y
 
+        neuron.add(0); //
+
         return neuron;
     }
 }

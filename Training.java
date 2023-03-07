@@ -38,7 +38,6 @@ public class Training {
 		double[][] input = NeuralNet.getInputs();
 		double[] output = NeuralNet.getDesiredOutput();
 		int t_qty = NeuralNet.getT_qty();
-		double sum = 0;
 		
 		for (int i = 0; i <= t_qty; i++) {
 			
@@ -51,9 +50,12 @@ public class Training {
 	        
 	        //adjust the hidden layer weights
 	        AdjustWeights.adjustHiddenWeights(output, hiddenLayerWeights, NeuralNet.getHiddenNeuronError());
+
+	        Communication.connected();
+	        int thres = Communication.threshold();
+	        NeuralNet.setSum(thres);
+	        NeuralNet.setThresholder(thres);
 		}
-		
-		NeuralNet.setSum(sum);
 		
 		return Training.class;
 	}

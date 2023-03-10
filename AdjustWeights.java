@@ -1,8 +1,8 @@
 package v;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.ArrayList;
 
 /**
  * Adjusts output layer weights based on the desired output and the 
@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class AdjustWeights {
 	
+	static HashMap<Integer, ArrayList<Object>> beehive = NeuralNet.getBeehive();
 	static double learning_rate = NeuralNet.getLearningrate();
 	
 	/**
@@ -31,11 +32,16 @@ public class AdjustWeights {
 		double[] weights = new double[desiredOutput.length];
 		
 		for (int i = 0; i < input.length; i++) {
-	        if (i < weights.length) {
-	            weights[i] = weights[i] + learning_rate * error * input[i];
-	        }
-	    }
-		
-		NeuralNet.setHiddenLayerWeights(weights);
+			for (Entry<Integer, ArrayList<Object>> bee : beehive.entrySet() ) {
+				while (i < weights.length) {
+					weights[i] = weights[i] + learning_rate * error * input[i];
+					double orig = (double) bee.getValue().indexOf(7);
+					double updated = orig + weights[i];
+					bee.getValue().set(7, updated);
+				}
+			}
+		}
+
+//		NeuralNet.setHiddenLayerWeights(weights);
 	}
 }

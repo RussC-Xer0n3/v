@@ -34,7 +34,7 @@ public class Main {
 		for (Entry<Integer, ArrayList<Object>> bee : hive.entrySet()) {
 			for (Entry<Integer, Integer> connections : connections.entrySet()) {
 				
-					bee.getValue().set(0, Training.training(bee.getKey().intValue()));
+					bee.getValue().set(0, Training.training(connections.getKey().intValue()));
 			}
 		}
 		
